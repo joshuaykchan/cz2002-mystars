@@ -9,7 +9,7 @@ public class User implements Serializable {
 
     public User(String username, String password, String accountType) {
         this.username = username;
-        this.password = password;
+        this.password = Hashing.hashPassword(password);
         this.accountType = accountType;
     }
 
@@ -23,5 +23,16 @@ public class User implements Serializable {
 
     public String getAccountType() {
         return this.accountType;
+    }
+
+    @Override
+    public boolean equals (Object o) {   
+        if (o instanceof User){
+            User u = (User) o;
+            if (this.username.equals(u.getUsername())){
+                return true;
+            }
+        }
+        return false;
     }
 }

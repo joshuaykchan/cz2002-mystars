@@ -1,8 +1,14 @@
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
+/**
+ * Boundary class to display the login user interface.
+ */
 public class LoginUI {
         
+    /**
+     * Reads in account type, username and password from User and passes them as input to the LoginController class to validate.
+     */
     public static void loginProcess() throws NoSuchAlgorithmException {
 
         boolean success = false;
@@ -31,6 +37,7 @@ public class LoginUI {
                         System.out.println("Invalid input! Please select a valid choice.");
                 }
             } while (choice != 1 && choice != 2);
+
             System.out.println("Enter your username: ");
             username = sc.nextLine();
             System.out.println("Enter your password: ");

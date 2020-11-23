@@ -1,13 +1,18 @@
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.io.Console;
 
+/**
+ * Main driver class for the MySTARS system, also facilitates login.
+ */
 public class MySTARSApp {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchAlgorithmException {
         boolean loginSuccess = false;
         
         int choice;
         Scanner sc = new Scanner(System.in);
+        Console con = System.console();
 
         String accountType = null;
         String username = null;
@@ -22,6 +27,7 @@ public class MySTARSApp {
                 switch (choice) {
                     case 1:
                         accountType = "Student";
+                        //StaffController.addCourse("OODP");
                         break;
                     case 2:
                         accountType = "Staff";
@@ -31,15 +37,23 @@ public class MySTARSApp {
                         break;
                 }
             } while (choice != 1 && choice != 2);
-            System.out.println("Enter your username: ");
+            System.out.print("Enter your username: ");
             username = sc.nextLine();
-            System.out.println("Enter your password: ");
-            password = sc.nextLine();
+            char[] readin = con.readPassword("Enter your password: ");
+            password = String.valueOf(readin);
+            // System.out.println("Enter your password: ");
+            // password = sc.nextLine();
 
             loginSuccess = LoginController.validate(accountType, username, password);
 
             if (!loginSuccess) System.out.println("Username or password incorrect.");
         }
-        // StaffManager.addStaff(new Staff("admin", "password", 1));
+        
+        if (accountType == "Student") {
+            StudentUI.display(StudentManager.getStudent(username));
+        }
+        else if (accountType == "Staff") {
+            StaffUI.display();
+        }
     }
 }
