@@ -200,7 +200,7 @@ public class StudentController {
 								toRegisterIndex.add(i);
 								StudentManager.updateStudentDB(studentList);
 								CourseManager.slotTaken(i.getIndexNum(), i.getCourseCode());
-								MailManager.sendFromGMail("jcykjoshua@gmail.com","Jcrox_1998","jcykjoshua@gmail.com","Congratulations!",
+								MailManager.sendFromGMail("from_email","password","to_email","Congratulations!",
 									"Off waitlist. Now registered for " + i.getCourseCode());
 								break;
 							}
